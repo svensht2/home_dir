@@ -1,0 +1,74 @@
+# File: .screenrc
+# Screen rc file - config options
+# George Abraham
+# Modified from Nasko's screenrc for linux
+# http://netsekure.org/misc/screenrc
+
+# no audible bell, just visual
+vbell off
+vbell_msg "Woof Woof"
+
+# detach on hangup
+autodetach on
+
+# don'cape ^ff
+escape ^jj
+bind ^a
+
+bindkey "^a" command
+
+
+# PuTTY arrow key bindings 
+# Ctrl + Right = Next
+###bindkey OC  next
+# Ctrl + Left = Prev
+###bindkey OD prev 
+# Ctrl + " screen -T dtterm -t BASH bash
+
+
+# define Ctrl+ left/right arrow to change between screens
+termcapinfo xterm "ks=\E[?1l\E=:ku=\E[A:kd=\E[B:kl=\E[D:kr=\E[C:kh=\E[5~:kH=\E[F"
+bindkey "OC" next
+bindkey "OD" prev
+bindkey "[1;5C" next
+bindkey "[1;5D" prev
+
+# Cntrl + Up Arrow creates new screen
+bindkey "OA" screen -T xterm -t bash -h 10000
+bindkey "[1;5A" screen -T xterm -t bash -h 10000
+# Support alternate screens so that, for example, when you
+# quit out of vi, the display is redrawn as it was before vi
+altscreen on
+
+#initial screen windows
+
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+screen -T xterm -t bash -h 10000
+
+#end of screenrc
+
+#dont display copyright page
+startup_message off
+
+# scroll back
+defscrollback 10000
+
+# setup the caption
+hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50>%n %t%{-b gk}%+w%<"
+
+################
+# keybindings
+################
+
+## remove some key bindings
+#bind .
+#bind ^\
+#bind \\
+#bind '

@@ -1,0 +1,4 @@
+alias vi='vim -O'
+alias ls='ls -aulh --color'
+alias ack='ack-grep -a --ignore-dir=out'
+alias latexmkspeciale="grep -l '\\documentclass' *tex | xargs latexmk -pdf -pvc -silent"

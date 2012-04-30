@@ -1,0 +1,469 @@
+"
+" Simion Venshtain
+"
+"
+
+"-----------------------------------------------------------------------------
+" Global Stuff
+"-----------------------------------------------------------------------------
+" Path stuff
+set runtimepath+=~/.vim
+
+"set color scheme
+colorscheme elflord
+
+" Get pathogen up and running
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" Add xptemplate global personal directory value
+if has("unix")
+  set runtimepath+=~/.vim/xpt-personal
+endif
+
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype on
+filetype plugin indent on
+
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+set nobackup		" do not keep a backup file, use versions instead
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set ignorecase
+set smartcase
+"set incsearch		" do incremental searching
+set expandtab
+set tabstop=4
+set shiftwidth=4
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+
+
+" Put these in an autocmd group, so that we can delete them easily.
+augroup vimrcEx
+au!
+
+" For all text files set 'textwidth' to 78 characters.
+autocmd FileType text setlocal textwidth=78
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
+augroup END
+
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+" set the search scan to wrap lines
+set wrapscan
+
+" Set the status line the way i like it
+set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+
+" tell VIM to always put a status line in, even if there is only one windiow
+set laststatus=2
+
+" Don't update the display while executing macros
+set lazyredraw
+
+" Don't show the current command int he lower right corner.  In OSX, if this is
+" set and lazyredraw is set then it's slow as molasses, so we unset this
+set showcmd
+
+" Show the current mode
+set showmode
+
+" Hide the mouse pointer while typing
+set mousehide
+
+" Set up the gui cursor to look nice
+set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
+" set the gui options the way I like
+set guioptions=acg
+
+" Setting this below makes it sow that error messages don't disappear after one second on startup.
+"set debug=msg
+
+" This is the timeout used while waiting for user input on a multi-keyed macro
+" or while just sitting and waiting for another key to be pressed measured
+" in milliseconds.
+"
+" i.e. for the ",d" command, there is a "timeoutlen" wait period between the
+"      "," key and the "d" key.  If the "d" key isn't pressed before the
+"      timeout expires, one of two things happens: The "," command is executed
+"      if there is one (which there isn't) or the command aborts.
+set timeoutlen=500
+" Make the command-line completion better
+set wildmenu
+
+" Make it easier to complete buffers, open files, etc...
+set wildignorecase
+
+" Same as default except that I remove the 'u' option
+" set complete=.,w,b,t
+
+" When completing by tag, show the whole tag, not just the function name
+set showfulltag
+
+" Automatically read a file that has changed on disk
+set autoread
+
+set grepprg=grep\ -nH\ $*
+
+" Trying out the line numbering thing... never liked it, but that doesn't mean
+" I shouldn't give it another go :)
+set relativenumber
+
+" Let the syntax highlighting for Java files allow cpp keywords
+let java_allow_cpp_keywords = 1
+
+" System default for mappings is now the "," character
+let mapleader = ","
+
+" Maps to make handling windows a bit easier
+"noremap <silent> ,h :wincmd h<CR>
+"noremap <silent> ,j :wincmd j<CR>
+"noremap <silent> ,k :wincmd k<CR>
+"noremap <silent> ,l :wincmd l<CR>
+"noremap <silent> ,sb :wincmd p<CR>
+noremap <silent> <C-F9>  :vertical resize -10<CR>
+noremap <silent> <C-F10> :resize +10<CR>
+noremap <silent> <C-F11> :resize -10<CR>
+noremap <silent> <C-F12> :vertical resize +10<CR>
+noremap <silent> ,s8 :vertical resize 83<CR>
+noremap <silent> ,cj :wincmd j<CR>:close<CR>
+noremap <silent> ,ck :wincmd k<CR>:close<CR>
+noremap <silent> ,ch :wincmd h<CR>:close<CR>
+noremap <silent> ,cl :wincmd l<CR>:close<CR>
+noremap <silent> ,cc :close<CR>
+noremap <silent> ,cw :cclose<CR>
+noremap <silent> ,ml <C-W>L
+noremap <silent> ,mk <C-W>K
+noremap <silent> ,mh <C-W>H
+noremap <silent> ,mj <C-W>J
+noremap <silent> <C-7> <C-W>>
+noremap <silent> <C-8> <C-W>+
+noremap <silent> <C-9> <C-W>+
+noremap <silent> <C-0> <C-W>>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" IMPORTANT for project and tagging.
+" This section ties my project setup to vim and will rebuild intelengently
+" based on an enviorment label(if all project stuff was done properly
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"au BufWritePost *.c,*.cpp,*.h,*.java silent! call RebuildTags()
+
+" replace with manual update
+map <F5> :call RebuildTags()<CR><CR> :e<CR>
+
+function! RebuildTags()
+    !build_tags.sh
+    cs reset
+endfunction
+
+" Set make to use current project
+set makeprg=make\ -C\ ~/${CURRENT_PROJECT}/build
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" style markers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" long lines(over 80)
+hi OverLength ctermbg=red ctermfg=white
+match OverLength /\%81v.\+/
+" white spaces
+hi ExtraWhitespace ctermbg=red guibg=red
+" Show trailing whitespace:
+match ExtraWhitespace /\s\+$/
+" Show trailing whitepace and spaces before a tab:
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+" Show tabs that are not at the start of a line:
+"match ExtraWhitespace /[^\t]\zs\t\+/
+" Show spaces used for indenting (so you use only tabs for indenting).
+"match ExtraWhitespace /^\t*\zs \+/
+
+" get all variations of todo and fixme highlighted
+syn match myTodo contained "\<\(todo\|fixme\):"
+hi def link myTodo Todo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Make things pretty
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Simon's awesome maps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Cygwin fixes
+" fix home key
+map [H <home>
+" split quickly
+" veritcal split
+map <A-right> :botright vsplit<CR>
+" horizontal split
+map <A-down> :rightbelow split<CR>
+" new tab when screen runs out
+map <A-Up>   :tab split<CR>
+
+" tab navigation
+map <C-S-left> :tabp<CR>
+map <C-S-right> :tabn<CR>
+" Quickfix navigation
+map <C-l> :cn<CR>
+map <C-k> :cp<CR>
+
+
+" Toggle paste mode
+set pastetoggle=<F2>
+
+"-----------------------------------------------------------------------------
+" FSwitch mappings
+"-----------------------------------------------------------------------------
+nmap <silent> ,of :FSHere<CR>
+nmap <silent> ,ol :FSRight<CR>
+nmap <silent> ,oL :FSSplitRight<CR>
+nmap <silent> ,oh :FSLeft<CR>
+nmap <silent> ,oH :FSSplitLeft<CR>
+nmap <silent> ,ok :FSAbove<CR>
+nmap <silent> ,oK :FSSplitAbove<CR>
+nmap <silent> ,oj :FSBelow<CR>
+nmap <silent> ,oJ :FSSplitBelow<CR>
+
+"-----------------------------------------------------------------------------
+" XPTemplate settings
+"-----------------------------------------------------------------------------
+let g:xptemplate_brace_complete = ''
+
+"-----------------------------------------------------------------------------
+" Conque Settings
+"-----------------------------------------------------------------------------
+let g:ConqueTerm_FastMode = 1
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_PromptRegex = '^-->'
+let g:ConqueTerm_TERM = 'xterm'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Buffer List
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:BufferListWidth = 25
+let g:BufferListMaxWidth = 50
+hi BufferSelected term=reverse ctermfg=white ctermbg=black cterm=bold
+hi BufferNormal term=NONE ctermfg=black ctermbg=darkcyan cterm=NONE
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" NERDTree 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F7> :NERDTreeToggle <CR> :set mouse=a <CR>
+let NERDChristmasTree = 1
+""" files to ignore """
+let NERDTreeIgnore = ['.*\.o$']
+let NERDTreeIgnore += ['.*\~$']
+let NERDTreeIgnore += ['.*\.out$']
+let NERDTreeIgnore += ['.*\.so$', '.*\.a$', '.*\.dll$']
+" audio/video "
+let NERDTreeIgnore += ['.*\.ogv$', '.*\.ogg$', '.*\.mp3$', '.*\.avi$']
+let NERDTreeIgnore += ['.*\.mp4$', '.*\.wmv$', '.*\.wma$', '.*\.mp([eE])?g$']
+" pics "
+let NERDTreeIgnore += ['.*\.[pP][nN][gG]$', '.*\.[jJ][pP]([eE])?[gG]$', '.*\.[gG][iI][fF]$']
+" tarballs "
+let NERDTreeIgnore += ['.*\.bz2$', '.*\.gz$', '.*\.tar$', '.*\.zip$', '.*\.tgz$', '.*\.rar$']
+" packages "
+let NERDTreeIgnore += ['.*\.deb$', '.*\.ipk$', '.*\.rpm$', '.*\.tbz$']
+" flash "
+let NERDTreeIgnore += ['.*\.[sS][wW][fF]$']
+" libtool archives and objs "
+let NERDTreeIgnore += ['.*\.lo', '.*\.la']
+" java's binary files "
+let NERDTreeIgnore += ['.*\.class']
+" tags "
+let NERDTreeIgnore += ['tags']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" TAGLIST """
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself "
+let Tlist_Use_Right_Window = 1 " split to the right side of the screen "
+let Tlist_Sort_Type = "order" " sort by order or name "
+"let Tlist_Display_Prototype = 0 " do not show prototypes and not tags in the taglist window. "
+let Tlist_Compart_Format = 1 " Remove extra information and blank lines from the taglist window. "
+let Tlist_GainFocus_On_ToggleOpen = 1 " Jump to taglist window on open. "
+let Tlist_Display_Tag_Scope = 1 " Show tag scope next to the tag name. "
+let Tlist_Close_On_Select = 0 " Close the taglist window when a file or tag is selected. "
+let Tlist_Enable_Fold_Column = 0 " Don't Show the fold indicator column in the taglist window "
+let Tlist_Auto_Highlight_Tag = 1
+let Tlist_Auto_Update = 1
+"Toggle taglist
+nnoremap <silent> <F8> :TlistToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" CODE COMPLETE """
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:completekey = "s<C-@>""
+let g:completekey = "<C-@>"
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""" OMNI CPP COMPLETE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"imap <C-@> <C-X><C-O>
+"set tags=${CURRENT_QPROJECT}/tags
+""""ctags -R --c++-kinds=+p --fields=+iaS --extra=+q /usr/include/gtkmm-2.4/
+""map ctags :!ctags -V -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR><Esc>
+"map ctags :!ctags -L tags.files -V --c++-kinds=+p --fields=+iaS --extra=+q <CR><Esc>
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 0 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ["std", \"_GLIBCXX_STD"]
+"" automatically open and close the popup menu / preview window
+"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"set completeopt=menuone,menu,longest,preview
+"set ofu=syntaxcomplete#Complete
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" CLANG COMPLETE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:clang_debug=1
+let g:clang_auto_select=1
+"let g:clang_complete_auto=0
+let g:clang_complete_copen=0
+let g:clang_hl_errors=1
+let g:clang_periodic_quickfix=0
+let g:clang_snippets=1
+let g:clang_snippets_engine="clang_complete"
+"let g:clang_conceal_snippets=1
+let g:clang_exec="clang"
+let g:clang_user_options="-I${CURRENT_PROJECT} 1>>/dev/null"
+"let g:clang_auto_user_options="path, "
+let g:clang_use_library=1
+let g:clang_sort_algo="priority"
+let g:clang_complete_macros=1
+let g:clang_complete_patterns=1
+"nnoremap <C-G> :call g:ClangUpdateQuickFix()<CR>
+au BufWritePost *.c,*.h,*.cpp silent :call g:ClangUpdateQuickFix()
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" CSCOPE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" put results in quickfix window
+set csqf=s-,g-,d-,c-,t-,e-,f-,i-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" CscopeSetup
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CscopeSetup()
+    let l:projectPath = GetProjectForFile(expand("%:p"))
+    if l:projectPath == ""
+        let l:projectPath = getcwd()
+    endif
+    let l:usedShell = expand("$SHELL")
+    execute "!find . -name '*.cpp' -o -name '*.c' -o -name '*.C' -o -name '*.cc' -o -name '*.h' -o -name '*.java' -o -name '*.mk' > cscope.files"
+    execute '!cscope -q -b'
+    " if [t]csh
+    if stridx(l:usedShell, 'csh') >= 0
+        execute ':!setenv CSCOPE_DB '.l:projectPath.'/cscope.out'
+    else
+        execute ':!export CSCOPE_DB='.l:projectPath.'/cscope.out'
+    endif
+    return
+endfunction
+
+
+"-----------------------------------------------------------------------------
+" Auto commands
+"-----------------------------------------------------------------------------
+augroup Binairy
+  au!
+  au BufReadPre   *.bin let &bin=1
+  au BufReadPost  *.bin if &bin | %!xxd
+  au BufReadPost  *.bin set filetype=xxd | endif
+  au BufWritePre  *.bin if &bin | %!xxd -r
+  au BufWritePre  *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+augroup END
+
+"-----------------------------------------------------------------------------
+"" Fix constant spelling mistakes
+"-----------------------------------------------------------------------------
+
+iab Acheive    Achieve
+iab acheive    achieve
+iab Alos       Also
+iab alos       also
+iab Aslo       Also
+iab aslo       also
+iab Becuase    Because
+iab becuase    because
+iab Bianries   Binaries
+iab bianries   binaries
+iab Bianry     Binary
+iab bianry     binary
+iab Charcter   Character
+iab charcter   character
+iab Charcters  Characters
+iab charcters  characters
+iab Exmaple    Example
+iab exmaple    example
+iab Exmaples   Examples
+iab exmaples   examples
+iab Fone       Phone
+iab fone       phone
+iab Lifecycle  Life-cycle
+iab lifecycle  life-cycle
+iab Lifecycles Life-cycles
+iab lifecycles life-cycles
+iab Seperate   Separate
+iab seperate   separate
+iab Seureth    Suereth
+iab seureth    suereth
+iab Shoudl     Should
+iab shoudl     should
+iab Taht       That
+iab taht       that
+iab Teh        The
+iab teh        the
