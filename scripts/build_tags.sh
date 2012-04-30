@@ -14,9 +14,9 @@ USER_PARAMS=$1
 DIR=${CURRENT_PROJECT}
 FILES=${DIR}/cscope.files
 
-if [ ! -e "$FILES" ]; then
+#if [ ! -e "$FILES" ]; then
     find ${DIR} -path ./out/ -prune -o \( -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.java" \) -print >  $FILES
-fi
+#fi
 
 # build cscope database for refernce lookup
 #echo "Creating CSCOPE DB"

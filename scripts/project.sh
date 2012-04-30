@@ -20,14 +20,28 @@ project_setup()
     else
         DIR=$1
     fi
+    echo "$DIR"
 	export CSCOPE_DB=${DIR}/cscope.out
-    export CURRENT_PROJECT=$DIR
+    export CURRENT_QPROJECT=$DIR
     if [ ! -e ${DIR}/cscope.out ]; then
         TEMP=${PROJECT_TAG_REBUILD}
         export PROJECT_TAG_REBUILD="1"
         build_tags.sh $2
         export PROJECT_TAG_REBUILD=$TEMP
     fi
+    if [ -e ${PROJECT_BASHRC} ]; then
+    . ${PROJECT_BASHRC}
+    fi
+}
+
+active_project_list()
+{
+    PROJECT_NAME="Android"
+    PROJECT_BASHRC=build/envsetup
+
+    PROJECT_NAME="Oxili Full"
+    PROJECT_BASHRC=driver/build/envsetup
+
 }
 
 android_setup()
@@ -35,6 +49,14 @@ android_setup()
 	# Setup project specific cscope database
 	. build/envsetup.sh
 	choosecombo 1 1 msm8660_surf 3
+    project_setup_no_update ${ANDROID_BUILD_TOP}
+}
+
+android_ics_setup()
+{
+	# Setup project specific cscope database
+	. build/envsetup.sh
+	choosecombo 1 msm8960 3
     project_setup_no_update ${ANDROID_BUILD_TOP}
 }
 
