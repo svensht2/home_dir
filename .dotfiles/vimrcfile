@@ -139,7 +139,7 @@ set timeoutlen=500
 set wildmenu
 
 " Make it easier to complete buffers, open files, etc...
-set wildignorecase
+"set wildignorecase
 
 " Same as default except that I remove the 'u' option
 " set complete=.,w,b,t
@@ -154,7 +154,7 @@ set grepprg=grep\ -nH\ $*
 
 " Trying out the line numbering thing... never liked it, but that doesn't mean
 " I shouldn't give it another go :)
-set relativenumber
+"set number
 
 " Let the syntax highlighting for Java files allow cpp keywords
 let java_allow_cpp_keywords = 1
@@ -187,6 +187,9 @@ noremap <silent> <C-7> <C-W>>
 noremap <silent> <C-8> <C-W>+
 noremap <silent> <C-9> <C-W>+
 noremap <silent> <C-0> <C-W>>
+
+" Alright... let's try this out
+ imap jj <esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " IMPORTANT for project and tagging.
@@ -270,7 +273,7 @@ nmap <silent> ,oJ :FSSplitBelow<CR>
 " XPTemplate settings
 "-----------------------------------------------------------------------------
 let g:xptemplate_brace_complete = ''
-
+let g:xptemplate_key = '<Tab>'
 "-----------------------------------------------------------------------------
 " Conque Settings
 "-----------------------------------------------------------------------------
@@ -289,7 +292,7 @@ hi BufferSelected term=reverse ctermfg=white ctermbg=black cterm=bold
 hi BufferNormal term=NONE ctermfg=black ctermbg=darkcyan cterm=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" NERDTree 
+""" NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F7> :NERDTreeToggle <CR> :set mouse=a <CR>
 let NERDChristmasTree = 1
@@ -364,17 +367,25 @@ let g:completekey = "<C-@>"
 "set ofu=syntaxcomplete#Complete
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""" CLANG COMPLETE
+"""" CLANG COMPLETE + other auto complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+" Limit popup menu height
+set pumheight=15
+
+" SuperTab option for context aware completion
+let g:SuperTabDefaultCompletionType="context"
+
 "let g:clang_debug=1
 let g:clang_auto_select=1
-"let g:clang_complete_auto=0
-let g:clang_complete_copen=0
+let g:clang_complete_auto=1
+let g:clang_complete_copen=1
 let g:clang_hl_errors=1
 let g:clang_periodic_quickfix=0
 let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
-"let g:clang_conceal_snippets=1
+let g:clang_conceal_snippets=0
 let g:clang_exec="clang"
 let g:clang_user_options="-I${CURRENT_PROJECT} 1>>/dev/null"
 "let g:clang_auto_user_options="path, "
@@ -384,7 +395,6 @@ let g:clang_complete_macros=1
 let g:clang_complete_patterns=1
 "nnoremap <C-G> :call g:ClangUpdateQuickFix()<CR>
 au BufWritePost *.c,*.h,*.cpp silent :call g:ClangUpdateQuickFix()
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
