@@ -22,7 +22,7 @@ project_setup()
     fi
     echo "$DIR"
 	export CSCOPE_DB=${DIR}/cscope.out
-    export CURRENT_QPROJECT=$DIR
+    export CURRENT_PROJECT=$DIR
     if [ ! -e ${DIR}/cscope.out ]; then
         TEMP=${PROJECT_TAG_REBUILD}
         export PROJECT_TAG_REBUILD="1"

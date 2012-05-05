@@ -12,6 +12,10 @@ set runtimepath+=~/.vim
 "set color scheme
 colorscheme elflord
 
+" Do some color scheme corrections
+hi Pmenu 		guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238
+hi PmenuSel 	guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
+
 " Get pathogen up and running
 filetype off
 call pathogen#runtime_append_all_bundles()
@@ -290,7 +294,13 @@ let g:BufferListWidth = 25
 let g:BufferListMaxWidth = 50
 hi BufferSelected term=reverse ctermfg=white ctermbg=black cterm=bold
 hi BufferNormal term=NONE ctermfg=black ctermbg=darkcyan cterm=NONE
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Mini Buffer explorer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:miniBufExplMapWindowNavVim=1
+let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplModSelTarget=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -336,14 +346,6 @@ let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Update = 1
 "Toggle taglist
 nnoremap <silent> <F8> :TlistToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" CODE COMPLETE """
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:completekey = "s<C-@>""
-let g:completekey = "<C-@>"
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"" OMNI CPP COMPLETE
@@ -394,7 +396,8 @@ let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=1
 "nnoremap <C-G> :call g:ClangUpdateQuickFix()<CR>
-au BufWritePost *.c,*.h,*.cpp silent :call g:ClangUpdateQuickFix()
+let g:AutoClang=1
+au BufWritePost *.c,*.h,*.cpp if g:AutoClang | silent :call g:ClangUpdateQuickFix() | endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
