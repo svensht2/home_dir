@@ -15,7 +15,7 @@ DIR=${CURRENT_PROJECT}
 FILES=${DIR}/cscope.files
 
 #if [ ! -e "$FILES" ]; then
-    find ${DIR} -path ./out/ -prune -o \( -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.java" \) -print >  $FILES
+    find ${DIR} -path ./out -prune -o \( -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.java" \) -print >  $FILES
 #fi
 
 # build cscope database for refernce lookup

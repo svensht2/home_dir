@@ -264,10 +264,10 @@ set pastetoggle=<F2>
 " FSwitch mappings
 "-----------------------------------------------------------------------------
 nmap <silent> ,of :FSHere<CR>
-nmap <silent> ,ol :FSRight<CR>
-nmap <silent> ,oL :FSSplitRight<CR>
-nmap <silent> ,oh :FSLeft<CR>
-nmap <silent> ,oH :FSSplitLeft<CR>
+nmap <silent> ,oL :FSRight<CR>
+nmap <silent> ,ol :FSSplitRight<CR>
+nmap <silent> ,oH :FSLeft<CR>
+nmap <silent> ,oh :FSSplitLeft<CR>
 nmap <silent> ,ok :FSAbove<CR>
 nmap <silent> ,oK :FSSplitAbove<CR>
 nmap <silent> ,oj :FSBelow<CR>
@@ -379,7 +379,7 @@ set pumheight=15
 " SuperTab option for context aware completion
 let g:SuperTabDefaultCompletionType="context"
 
-"let g:clang_debug=1
+let g:clang_debug=1
 let g:clang_auto_select=1
 let g:clang_complete_auto=1
 let g:clang_complete_copen=1
@@ -389,7 +389,8 @@ let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_conceal_snippets=0
 let g:clang_exec="clang"
-let g:clang_user_options="-I${CURRENT_PROJECT} 1>>/dev/null"
+"let g:clang_user_options="-I${CURRENT_PROJECT} 1>>/dev/null"
+let g:clang_user_options="-I${CURRENT_PROJECT}"
 "let g:clang_auto_user_options="path, "
 let g:clang_use_library=1
 let g:clang_sort_algo="priority"
