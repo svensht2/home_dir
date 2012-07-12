@@ -29,18 +29,18 @@ project_setup()
         build_tags.sh $2
         export PROJECT_TAG_REBUILD=$TEMP
     fi
-    if [ -e ${PROJECT_BASHRC} ]; then
-    . ${PROJECT_BASHRC}
+    if [ -n "${PROJECT_BASHRC}" ]; then
+        . ${PROJECT_BASHRC}
     fi
 }
 
 active_project_list()
 {
     PROJECT_NAME="Android"
-    PROJECT_BASHRC=build/envsetup
+    PROJECT_BASHRC=build/envsetup.sh
 
     PROJECT_NAME="Oxili Full"
-    PROJECT_BASHRC=driver/build/envsetup
+    PROJECT_BASHRC=driver/build/envsetup.sh
 
 }
 

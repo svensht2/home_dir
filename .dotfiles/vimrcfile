@@ -211,7 +211,7 @@ function! RebuildTags()
 endfunction
 
 " Set make to use current project
-set makeprg=make\ -C\ ~/${CURRENT_PROJECT}/build
+set makeprg=make\ -C\ ${CURRENT_PROJECT}/build
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " style markers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
