@@ -379,7 +379,7 @@ set pumheight=15
 " SuperTab option for context aware completion
 let g:SuperTabDefaultCompletionType="context"
 
-let g:clang_debug=1
+"let g:clang_debug=1
 let g:clang_auto_select=1
 let g:clang_complete_auto=1
 let g:clang_complete_copen=1
@@ -427,6 +427,12 @@ function! CscopeSetup()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" P4
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> ,p4e :!p4 edit %<CR>
+nmap <silent> ,p4a :!p4 add %<CR>
+nmap <silent> ,p4d :!p4 diff %<CR>
 "-----------------------------------------------------------------------------
 " Auto commands
 "-----------------------------------------------------------------------------
@@ -481,3 +487,5 @@ iab Taht       That
 iab taht       that
 iab Teh        The
 iab teh        the
+
+
