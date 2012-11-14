@@ -379,11 +379,7 @@ set pumheight=15
 " SuperTab option for context aware completion
 let g:SuperTabDefaultCompletionType="context"
 
-<<<<<<< HEAD
-"let g:clang_debug=1
-=======
 let g:clang_debug=0
->>>>>>> 37c9aa3bcf5e703c962d992cfc4740d9dca56ac0
 let g:clang_auto_select=1
 let g:clang_complete_auto=1
 let g:clang_complete_copen=1
