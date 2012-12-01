@@ -1,5 +1,5 @@
 #!/bin/bash
-HOMEDIR=home_dir
+HOMEDIR=~/home_dir
 #pull repos
 pushd ~/${HOMEDIR}
 echo "Getting latest environment..."
@@ -21,5 +21,5 @@ ln -s ~/${HOMEDIR}/.vim ~/.vim
 ln -s ~/${HOMEDIR}/scripts ~/scripts
 ln -s ~/${HOMEDIR}/.dotfiles/vimrcfile ~/.vimrc
 ln -s ~/${HOMEDIR}/.dotfiles/screenrcfile ~/.screenrc
-ln -s ~/home_dir/.dotfiles/bashrcfile ~/.bashrc
-ln -s ~/home_dir/.dotfiles/aliasfile ~/.alias
+ln -s ~/${HOMEDIR}/.dotfiles/bashrcfile ~/.bashrc
+ln -s ~/${HOMEDIR}/.dotfiles/aliasfile ~/.alias
