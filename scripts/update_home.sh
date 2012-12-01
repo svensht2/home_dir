@@ -1,5 +1,5 @@
 #!/bin/bash
-HOMEDIR=~/home_dir
+HOMEDIR=home_dir
 #pull repos
 pushd ~/${HOMEDIR}
 echo "Getting latest environment..."
