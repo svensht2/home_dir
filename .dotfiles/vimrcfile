@@ -215,9 +215,9 @@ set makeprg=make\ -C\ ${CURRENT_PROJECT}/build
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " style markers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" long lines(over 80)
+" long lines(over 78)
 hi OverLength ctermbg=red ctermfg=white
-match OverLength /\%81v.\+/
+match OverLength /\%78v.\+/
 " white spaces
 hi ExtraWhitespace ctermbg=red guibg=red
 " Show trailing whitespace:
@@ -225,7 +225,7 @@ match ExtraWhitespace /\s\+$/
 " Show trailing whitepace and spaces before a tab:
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 " Show tabs that are not at the start of a line:
-"match ExtraWhitespace /[^\t]\zs\t\+/
+match ExtraWhitespace /[^\t]\zs\t\+/
 " Show spaces used for indenting (so you use only tabs for indenting).
 "match ExtraWhitespace /^\t*\zs \+/
 
@@ -256,6 +256,8 @@ map <C-S-right> :tabn<CR>
 map <C-l> :cn<CR>
 map <C-k> :cp<CR>
 
+" open Quickfix entry in new tab or go to existing tab
+set switchbuf+=usetab,newtab
 
 " Toggle paste mode
 set pastetoggle=<F2>
@@ -351,7 +353,7 @@ nnoremap <silent> <F8> :TlistToggle<CR>
 """"" OMNI CPP COMPLETE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "imap <C-@> <C-X><C-O>
-"set tags=${CURRENT_QPROJECT}/tags
+set tags=${CURRENT_PROJECT}/tags
 """"ctags -R --c++-kinds=+p --fields=+iaS --extra=+q /usr/include/gtkmm-2.4/
 ""map ctags :!ctags -V -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR><Esc>
 "map ctags :!ctags -L tags.files -V --c++-kinds=+p --fields=+iaS --extra=+q <CR><Esc>
@@ -388,7 +390,7 @@ let g:clang_periodic_quickfix=0
 let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_conceal_snippets=0
-let g:clang_exec="clang"
+"let g:clang_exec="clang"
 "let g:clang_user_options="-I${CURRENT_PROJECT} 1>>/dev/null"
 let g:clang_user_options="-I${CURRENT_PROJECT}"
 "let g:clang_auto_user_options="path, "

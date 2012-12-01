@@ -44,6 +44,14 @@ active_project_list()
 
 }
 
+ifuse_setup()
+{
+    export CURRENT_PROJECT=quadnocular
+    cd ~/Projects/${CURRENT_PROJECT}
+    export PROJECT_BASHRC=heptagon/build/linux/envsetup.sh
+    project_setup
+}
+
 android_setup()
 {
 	# Setup project specific cscope database
