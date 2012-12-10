@@ -1,0 +1,12 @@
+vim
+build-essential
+cmake
+git
+subversion
+curl
+ack-grep
+ctags
+cscope
+gcc-multilib libc6-i386 libc6-dev-i386
+g++-multilib
+ia32-libs

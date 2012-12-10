@@ -4,7 +4,9 @@
 # Add to PATH
 ###############################################################################
 export PATH=/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:~/bin/:~/scripts:~/Apps/eclipse:~/Apps/google_appengine
-export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib:/home/simonv/sources/boost_1_52_0/stage/lib
+export ANDROID_SDK=~/Downloads/adt-bundle-linux/sdk
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/lib/i386-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib32:/lib:/lib32:/lib64
 
 ###############################################################################
 # Confiure terminal
